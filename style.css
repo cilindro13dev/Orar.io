@@ -1,0 +1,56 @@
+@font-face {
+  font-family: gealman;
+  src: url(fonts/gealman.otf);
+}
+
+@font-face {
+  font-family: modavina;
+  src: url(fonts/modavina.otf);
+}
+
+body {
+  background-color: #0f0a0a;
+  color: #82d173;
+
+  & > header {
+    height: 6rem;
+    /* background: #000; */
+    color: #82d173;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
+    & > h1 {
+      font-size: 3.5rem;
+      letter-spacing: 0.25rem;
+      text-transform: uppercase;
+      font-family: modavina;
+    }
+  }
+
+  & > .main {
+    height: calc(100vh - 6rem);
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    gap: 1rem;
+
+    & > div {
+      height: 100%;
+      background: #151515;
+      border-radius: 0.6rem;
+    }
+
+    & > .schedule {
+      width: 75%;
+    }
+
+    & > .navbar {
+      width: 25%;
+    }
+  }
+}
