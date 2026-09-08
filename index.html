@@ -1,21 +1,128 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru" translate="no" class="notranslate" data-theme="dark-red">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Orar.io</title>
-    <script src="./favicon.js"></script>
+
     <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./icons.css" />
     <link rel="stylesheet" href="./style.css" />
+
+    <script type="module" src="./theme.js"></script>
+    <script defer src="./script.js"></script>
+    <script defer src="./navbar.js"></script>
+    <script type="module" src="./data.js"></script>
   </head>
   <body>
     <header class="user-select">
       <h1>Orar.io</h1>
+      <div class="header-buttons">
+        <div class="header-button" data-icon="pencil"></div>
+        <div class="header-button" data-icon="archive-down"></div>
+        <div class="header-button" data-icon="archive-up"></div>
+        <div class="header-button" data-icon="settings"></div>
+        <div class="header-button" data-icon="ghost" id="user"></div>
+      </div>
     </header>
+
     <section class="main">
-      <div class="schedule"></div>
-      <div class="navbar"></div>
+      <div class="schedule">
+        <div class="day user-select">
+          <h2>Monday</h2>
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+        </div>
+
+        <div class="day user-select">
+          <h2>Tuesday</h2>
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+        </div>
+
+        <div class="day user-select">
+          <h2>Wednesday</h2>
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+        </div>
+
+        <div class="day user-select">
+          <h2>Thursday</h2>
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+        </div>
+
+        <div class="day user-select">
+          <h2>Friday</h2>
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+        </div>
+
+        <div class="day user-select">
+          <h2>Saturday</h2>
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+          <a class="lecture" target="_blank" href=""></a> <br />
+        </div>
+      </div>
+
+      <div class="navbar">
+        <div class="clock user-select">
+          <h1 id="clock">XX:XX</h1>
+          <h2 id="date">Day, the XXth of Month, Year</h2>
+        </div>
+
+        <div class="bells user-select">
+          <p class="bell"></p>
+          <p class="bell"></p>
+          <p class="bell"></p>
+          <p class="bell"></p>
+          <p class="bell"></p>
+          <p class="bell"></p>
+          <p class="bell"></p>
+          <p class="bell"></p>
+        </div>
+
+        <div class="air-alert">
+          <div class="alert-state" data-icon="air-alert"></div>
+          <h1 class="alert-desc">Air Alert: Coming Soon</h1>
+        </div>
+      </div>
     </section>
   </body>
-  <script src="./script.js"></script>
 </html>

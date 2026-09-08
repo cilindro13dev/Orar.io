@@ -1,0 +1,60 @@
+/* Базовые стили для любого элемента с data-icon */
+[data-icon] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+[data-icon]::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  /* Используем переменную для цвета вектора. По умолчанию - цвет текста */
+  background-color: var(--icon-color, currentColor);
+
+  -webkit-mask-origin: content-box;
+  mask-origin: content-box;
+  -webkit-mask-clip: content-box;
+  mask-clip: content-box;
+
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* Словарь (сюда только дописываешь новые иконки) */
+[data-icon="pencil"]::before {
+  -webkit-mask-image: url("./img/pencil.svg");
+  mask-image: url("./img/pencil.svg");
+}
+
+[data-icon="archive-down"]::before {
+  -webkit-mask-image: url("./img/archive-down.svg");
+  mask-image: url("./img/archive-down.svg");
+}
+
+[data-icon="archive-up"]::before {
+  -webkit-mask-image: url("./img/archive-up.svg");
+  mask-image: url("./img/archive-up.svg");
+}
+
+[data-icon="settings"]::before {
+  -webkit-mask-image: url("./img/settings.svg");
+  mask-image: url("./img/settings.svg");
+}
+
+[data-icon="ghost"]::before {
+  -webkit-mask-image: url("./img/ghost.svg");
+  mask-image: url("./img/ghost.svg");
+}
+
+[data-icon="air-alert"]::before {
+  -webkit-mask-image: url("./img/air-alert.svg");
+  mask-image: url("./img/air-alert.svg");
+}

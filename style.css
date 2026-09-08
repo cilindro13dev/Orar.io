@@ -1,3 +1,62 @@
+/* Базовые роли переменных */
+:root {
+  --bg-page: #0f0a0a; /* Основной фон (body) */
+  --bg-surface: #151515; /* Фон блоков/карточек */
+  --bg-element: #242424; /* Фон глубоких элементов */
+
+  --color-accent: #82d173; /* Контрастный цвет для важных элементов */
+  --color-accent-hover: #75be66; /* Ховерный контраст */
+  --color-plain: #ffffff; /* Цвет для обычного текста */
+  --special: #ffd700; /* Цвет специальных блоков */
+  --special-hover: #ffbf00; /* Ховерный специальный */
+  --airalert-safe: #3fd122; /* Цвет блока воздушной тревоги (нет) */
+  --airalert-danger: #d12222; /* Цвет блока воздушной тревоги (есть) */
+}
+
+/* Тема 1: Dark Pink */
+[data-theme="dark-pink"] {
+  --bg-page: #1e1b1c;
+  --bg-surface: #262223;
+  --bg-element: #332d2f;
+
+  --color-accent: #e91e63;
+  --color-accent-hover: #d21756;
+  --color-plain: #ffffff;
+}
+
+/* Тема 2: Dark Red */
+[data-theme="dark-red"] {
+  --bg-page: #001f25;
+  --bg-surface: #002a32;
+  --bg-element: #003843;
+
+  --color-accent: #ed254e;
+  --color-accent-hover: #d11c41;
+  --color-plain: #ffffff;
+}
+
+/* Тема 3: Dark Purple */
+[data-theme="dark-purple"] {
+  --bg-page: #00120b;
+  --bg-surface: #0a1f17;
+  --bg-element: #142e23;
+
+  --color-accent: #c200fb;
+  --color-accent-hover: #a800db;
+  --color-plain: #ffffff;
+}
+
+/* Тема 4: Dark Green */
+[data-theme="dark-green"] {
+  --bg-page: #0f0a0a;
+  --bg-surface: #151515;
+  --bg-element: #242424;
+
+  --color-accent: #82d173;
+  --color-accent-hover: #75be66;
+  --color-plain: #ffffff;
+}
+
 @font-face {
   font-family: gealman;
   src: url(fonts/gealman.otf);
@@ -9,24 +68,54 @@
 }
 
 body {
-  background-color: #0f0a0a;
-  color: #82d173;
+  background-color: var(--bg-page);
+  color: var(--color-accent); /* Основной цвет текста по умолчанию */
 
   & > header {
     height: 6rem;
-    /* background: #000; */
-    color: #82d173;
+    color: var(--color-accent);
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding: 1rem 1.5rem;
 
     & > h1 {
       font-size: 3.5rem;
       letter-spacing: 0.25rem;
       text-transform: uppercase;
       font-family: modavina;
+      /* Если хочешь заголовок цвета заглушки: color: var(--color-plain); */
+    }
+
+    & > .header-buttons {
+      display: flex;
+      gap: 1.5rem;
+
+      & > .header-button {
+        width: 4.5rem;
+        height: 4.5rem;
+        padding: 1rem;
+        border-radius: 1em;
+
+        background-color: var(--color-accent); /* ФОН КНОПКИ */
+        --icon-color: var(--bg-page); /* ЦВЕТ ИКОНКИ (ВЕКТОРА) */
+
+        &:hover {
+          background-color: var(--color-accent-hover);
+        }
+      }
+
+      /* Кастомный призрак */
+      & > #user {
+        background-color: var(--bg-page); /* ФОН КНОПКИ */
+        --icon-color: var(--color-accent); /* ЦВЕТ ВЕКТОРА */
+        border: 2px solid var(--color-accent);
+        border-radius: 10em;
+
+        &:hover {
+          background-color: var(--bg-element);
+        }
+      }
     }
   }
 
@@ -34,23 +123,128 @@ body {
     height: calc(100vh - 6rem);
     display: flex;
     flex-direction: row;
-    padding-bottom: 1rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding: 0 1.5rem 1rem 1.5rem;
     gap: 1rem;
 
     & > div {
       height: 100%;
-      background: #151515;
+      background: var(--bg-surface); /* Динамический фон блоков */
       border-radius: 0.6rem;
     }
 
     & > .schedule {
       width: 75%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      row-gap: 1.5rem;
+      padding: 2.5rem;
+      padding-top: 1.5rem;
+
+      & > .day {
+        width: calc((100% - 4rem) / 3);
+        /* background: #000; */
+        /* padding: 1rem; */
+
+        & > h2 {
+          color: var(--color-accent);
+          font-size: 3rem;
+          font-family: modavina;
+        }
+
+        & > a {
+          color: var(--color-plain);
+          font-size: 2rem;
+          font-family: gealman;
+          padding-left: 1.5rem;
+
+          &.active {
+            color: var(--special);
+          }
+
+          &:hover {
+            color: var(--special-hover);
+            /* text-decoration: underline; */
+          }
+        }
+      }
     }
 
     & > .navbar {
       width: 25%;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 1rem;
+
+      & > .clock {
+        width: 100%;
+        padding: 1rem;
+        font-family: gealman;
+        color: var(--color-plain);
+        background: var(--bg-element);
+        border-radius: 0.7rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & > h1 {
+          font-size: 7rem;
+          margin-bottom: -2rem;
+          font-variant-numeric: tabular-nums;
+        }
+
+        & > h2 {
+          font-size: 1.8rem;
+          margin-bottom: 1.5rem;
+          color: var(--color-accent); /* А тут подмешиваем контраст */
+        }
+      }
+
+      & > .bells {
+        width: 100%;
+        padding: 1rem;
+        font-family: modavina;
+        color: var(--color-plain);
+        background: var(--bg-element);
+        border-radius: 0.7rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & > .bell {
+          font-size: 2rem;
+        }
+      }
+
+      .air-alert {
+        width: 100%;
+        height: 8rem;
+        padding: 1.5rem;
+        font-family: modavina;
+        color: var(--airalert-danger);
+        background: var(--bg-element);
+        border-radius: 0.7rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.5rem;
+
+        & > .alert-state {
+          width: 5rem;
+          height: 5rem;
+          padding: 1rem;
+          border-radius: 0.7rem;
+          background: var(--airalert-danger);
+          --icon-color: var(--color-plain);
+        }
+      }
     }
   }
+}
+
+/* Все SVG на странице красятся в цвет текста родительского блока */
+svg {
+  fill: var(--color-plain);
 }
