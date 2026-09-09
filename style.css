@@ -1,8 +1,10 @@
 /* Базовые роли переменных */
 :root {
+  interpolate-size: allow-keywords;
   --bg-page: #0f0a0a; /* Основной фон (body) */
   --bg-surface: #151515; /* Фон блоков/карточек */
   --bg-element: #242424; /* Фон глубоких элементов */
+  --bg-element-hover: #333333; /* Глубокий ховер */
 
   --color-accent: #82d173; /* Контрастный цвет для важных элементов */
   --color-accent-hover: #75be66; /* Ховерный контраст */
@@ -18,6 +20,7 @@
   --bg-page: #1e1b1c;
   --bg-surface: #262223;
   --bg-element: #332d2f;
+  --bg-element-hover: #463e41;
 
   --color-accent: #e91e63;
   --color-accent-hover: #d21756;
@@ -29,6 +32,7 @@
   --bg-page: #001f25;
   --bg-surface: #002a32;
   --bg-element: #003843;
+  --bg-element-hover: #004d5c;
 
   --color-accent: #ed254e;
   --color-accent-hover: #d11c41;
@@ -40,6 +44,7 @@
   --bg-page: #00120b;
   --bg-surface: #0a1f17;
   --bg-element: #142e23;
+  --bg-element-hover: #1c4131;
 
   --color-accent: #c200fb;
   --color-accent-hover: #a800db;
@@ -51,6 +56,7 @@
   --bg-page: #0f0a0a;
   --bg-surface: #151515;
   --bg-element: #242424;
+  --bg-element-hover: #333333;
 
   --color-accent: #82d173;
   --color-accent-hover: #75be66;
@@ -124,7 +130,7 @@ body {
     display: flex;
     flex-direction: row;
     padding: 0 1.5rem 1rem 1.5rem;
-    gap: 1rem;
+    gap: 3.5rem;
 
     & > div {
       height: 100%;
@@ -141,9 +147,64 @@ body {
       row-gap: 1.5rem;
       padding: 2.5rem;
       padding-top: 1.5rem;
+      border-top-right-radius: 0;
+      position: relative;
+
+      .pages {
+        position: absolute;
+        /* top: -3rem; */
+        top: 0;
+        right: -3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        perspective: 40rem;
+        overflow: hidden;
+
+        & > button {
+          width: 3rem;
+          height: 10rem;
+          background-color: var(--bg-surface);
+          color: var(--color-plain);
+          font-family: gealman;
+          font-size: 1.5rem;
+          border: none;
+          border-radius: 0 12px 12px 0;
+          padding-right: 0.5rem;
+          transform-origin: left center;
+          transition: all 0.2s ease;
+          transform: translateX(-5px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          & > span {
+            display: inline-block;
+            transform: rotate(90deg);
+            white-space: nowrap;
+          }
+
+          &:hover {
+            background-color: var(--bg-element);
+            color: var(--color-accent);
+            cursor: pointer;
+            /* Наведенная вкладка слегка выдвигается */
+            transform: translateX(-3px);
+          }
+
+          &.active {
+            background-color: var(--color-accent);
+            color: var(--bg-page);
+            transform: translateX(
+              0px
+            ); /* Активная становится плоской и выступает вперед */
+          }
+        }
+      }
 
       & > .day {
         width: calc((100% - 4rem) / 3);
+        counter-reset: lesson-num;
         /* background: #000; */
         /* padding: 1rem; */
 
@@ -153,19 +214,53 @@ body {
           font-family: modavina;
         }
 
-        & > a {
-          color: var(--color-plain);
-          font-size: 2rem;
-          font-family: gealman;
-          padding-left: 1.5rem;
+        .lecture-row {
+          display: flex;
+          flex-direction: row;
+          gap: 1rem;
+          align-items: center;
 
-          &.active {
-            color: var(--special);
+          &:before {
+            counter-increment: lesson-num;
+            content: counter(lesson-num) ".";
+            font-size: 2rem;
+            font-family: gealman;
+            padding-left: 1.5rem;
+            width: 2rem;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+            color: var(--text-color, inherit);
           }
 
-          &:hover {
-            color: var(--special-hover);
-            /* text-decoration: underline; */
+          & > a {
+            /* width: 75%; */
+            color: var(--color-plain);
+            font-size: 2rem;
+            font-family: gealman;
+            padding-left: 1.5rem;
+
+            &.active {
+              color: var(--special);
+            }
+
+            &:hover {
+              color: var(--special-hover);
+              /* text-decoration: underline; */
+            }
+          }
+
+          & > button {
+            width: 2.2rem;
+            height: 2.2rem;
+            padding: 0.3em;
+            --icon-color: var(--special);
+            border-radius: 0.5rem;
+
+            &:hover {
+              background-color: var(--special);
+              --icon-color: var(--bg-surface);
+              cursor: pointer;
+            }
           }
         }
       }
@@ -238,6 +333,180 @@ body {
           border-radius: 0.7rem;
           background: var(--airalert-danger);
           --icon-color: var(--color-plain);
+        }
+      }
+    }
+  }
+
+  & > .bg-coverer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > .form-lecture {
+      width: 40rem;
+      background-color: var(--bg-surface);
+      padding: 1.5rem;
+      border-radius: 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+
+      & > h1 {
+        text-align: center;
+        font-family: modavina;
+        font-size: 2rem;
+      }
+
+      & > input[type="text"] {
+        width: 100%;
+        padding: 0.5rem;
+        background-color: var(--bg-page);
+        color: var(--color-accent);
+        font-family: gealman;
+        font-size: 1.8rem;
+        border-radius: 0.5rem;
+
+        &:first-of-type {
+          margin-top: 1rem;
+        }
+
+        &:last-of-type {
+          margin-bottom: 1rem;
+        }
+      }
+
+      & > .flexbox {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+
+        & > button {
+          width: 50%;
+          padding: 0.5rem;
+          font-family: modavina;
+          font-size: 1.8rem;
+          border-radius: 0.5rem;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        & > #submit {
+          background-color: var(--color-accent);
+          color: var(--bg-page);
+
+          &:hover {
+            background-color: var(--color-accent-hover);
+          }
+        }
+
+        & > #cancel {
+          background-color: var(--bg-element);
+          color: var(--color-plain);
+
+          &:hover {
+            background-color: var(--bg-element-hover);
+          }
+        }
+      }
+    }
+
+    & > .form-bell {
+      width: 40rem;
+      background-color: var(--bg-surface);
+      padding: 1.5rem;
+      border-radius: 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+
+      &.inactive {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        visibility: hidden;
+      }
+
+      & > select {
+        width: 100%;
+        padding: 0.5rem;
+        background-color: var(--bg-element);
+        color: var(--color-accent);
+        font-family: modavina;
+        font-size: 1.5rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      & > .input-time {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        & > p {
+          font-family: modavina;
+          font-size: 3.4rem;
+        }
+
+        & > .group {
+          width: 25%;
+          /* background: #000; */
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          & > .up {
+            width: 3rem;
+            height: 3rem;
+            --icon-color: var(--color-accent);
+          }
+
+          & > input[type="number"] {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 0.7rem;
+            font-size: 2rem;
+            font-family: modavina;
+            text-align: center;
+            background: var(--bg-page);
+          }
+
+          & > .down {
+            width: 3rem;
+            height: 3rem;
+            transform: rotate(180deg);
+            --icon-color: var(--color-accent);
+          }
+        }
+      }
+
+      & > button {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 1rem;
+        background-color: var(--color-accent);
+        color: var(--bg-page);
+        font-family: modavina;
+        font-size: 1.8rem;
+
+        &:hover {
+          background-color: var(--color-accent-hover);
+          cursor: pointer;
         }
       }
     }

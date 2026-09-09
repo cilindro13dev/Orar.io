@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./icons.css" />
     <link rel="stylesheet" href="./style.css" />
+    <!-- <link rel="stylesheet" href="./time-picker.css" /> -->
 
     <script type="module" src="./theme.js"></script>
-    <script defer src="./script.js"></script>
+    <script type="module" src="./script.js"></script>
     <script defer src="./navbar.js"></script>
     <script type="module" src="./data.js"></script>
+    <!-- <script defer src="./time-picker.js"></script> -->
   </head>
   <body>
     <header class="user-select">
@@ -28,76 +30,184 @@
 
     <section class="main">
       <div class="schedule">
+        <div class="pages">
+          <button class="active">
+            <span>PAGE 1</span>
+          </button>
+          <button>
+            <span>PAGE 2</span>
+          </button>
+          <button>
+            <span>PAGE 3</span>
+          </button>
+        </div>
+
         <div class="day user-select">
           <h2>Monday</h2>
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
         </div>
 
         <div class="day user-select">
           <h2>Tuesday</h2>
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
         </div>
 
         <div class="day user-select">
           <h2>Wednesday</h2>
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
         </div>
 
         <div class="day user-select">
           <h2>Thursday</h2>
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
         </div>
 
         <div class="day user-select">
           <h2>Friday</h2>
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
         </div>
 
         <div class="day user-select">
           <h2>Saturday</h2>
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
-          <a class="lecture" target="_blank" href=""></a> <br />
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
+          <div class="lecture-row">
+            <a class="lecture" target="_blank" href=""></a>
+          </div>
         </div>
       </div>
 
@@ -122,6 +232,70 @@
           <div class="alert-state" data-icon="air-alert"></div>
           <h1 class="alert-desc">Air Alert: Coming Soon</h1>
         </div>
+      </div>
+    </section>
+
+    <section class="bg-coverer none">
+      <div class="form-lecture none">
+        <h1>Link Editing</h1>
+
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Name"
+          maxlength="22"
+        />
+        <input type="text" name="link" id="link" placeholder="Link" />
+
+        <div class="flexbox">
+          <button id="cancel">Cancel</button>
+          <button id="submit">Save</button>
+        </div>
+      </div>
+
+      <div class="form-bell none">
+        <select name="bell" id="bell">
+          <option value="" disabled selected hidden>Bell #</option>
+          <option value="0">Bell 1</option>
+          <option value="1">Bell 2</option>
+          <option value="2">Bell 3</option>
+          <option value="3">Bell 4</option>
+          <option value="4">Bell 5</option>
+          <option value="5">Bell 6</option>
+          <option value="6">Bell 7</option>
+          <option value="7">Bell 8</option>
+        </select>
+
+        <div class="input-time" data-min="" data-max="">
+          <div class="group">
+            <div class="up" data-icon="arrow"></div>
+            <input type="number" name="" id="" />
+            <div class="down" data-icon="arrow"></div>
+          </div>
+
+          <div class="group">
+            <div class="up" data-icon="arrow"></div>
+            <input type="number" name="" id="" />
+            <div class="down" data-icon="arrow"></div>
+          </div>
+
+          <p>:</p>
+
+          <div class="group">
+            <div class="up" data-icon="arrow"></div>
+            <input type="number" name="" id="" />
+            <div class="down" data-icon="arrow"></div>
+          </div>
+
+          <div class="group">
+            <div class="up" data-icon="arrow"></div>
+            <input type="number" name="" id="" />
+            <div class="down" data-icon="arrow"></div>
+          </div>
+        </div>
+
+        <button id="submit">Save</button>
       </div>
     </section>
   </body>

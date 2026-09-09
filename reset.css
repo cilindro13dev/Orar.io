@@ -44,6 +44,20 @@ textarea {
   margin: 0;
 }
 
+/* Отключаем псевдоэлементы WebKit (Chrome, Safari, Edge, Opera) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  display: none; /* Убирает их из потока полностью */
+}
+
+/* Отключаем в Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 img,
 picture,
 video,

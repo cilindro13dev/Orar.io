@@ -1,91 +1,210 @@
 import setTheme from "./theme.js";
 
-let data = {
+const STORAGE_KEY = "app_data";
+
+// Вспомогательные фабрики
+const createBellPair = () => ({ start: "XX : XX", end: "XX : XX" });
+const createSchedulePair = () => ({ text: "------------", url: "" });
+
+const createDay = () =>
+  Array.from({ length: 6 }, () =>
+    Array.from({ length: 8 }, createSchedulePair),
+  );
+
+const getDefaultData = () => ({
   theme: 0,
-  bells: [],
-  schedule: [[], [], []],
-};
+  bells: Array.from({ length: 6 }, createBellPair),
+  schedule: Array.from({ length: 3 }, createDay),
+});
 
-const fillLorem = () => {
-  // Пара для звонков (начало и конец)
-  const createBellPair = () => ({ start: "XX : XX", end: "XX : XX" });
+// Глубокое слияние
+const mergeData = (saved, template) => {
+  if (saved === null || typeof saved !== typeof template) return template;
 
-  // Пара для расписания (текст и ссылка)
-  const createSchedulePair = () => ({ text: "------------", url: "" });
-
-  // 1 день расписания: 6 уроков по 8 объектов
-  const createDay = () =>
-    Array.from({ length: 6 }, () =>
-      Array.from({ length: 8 }, createSchedulePair),
-    );
-
-  return {
-    theme: 0,
-    // 6 пар времени звонков { start, end }
-    bells: Array.from({ length: 6 }, createBellPair),
-    // 3 блока по 6 дней расписания { text, url }
-    schedule: Array.from({ length: 3 }, createDay),
-  };
-};
-
-data = fillLorem();
-console.log(data);
-
-const RenderSchedule = (page) => {
-  const anchors = Array.from(document.querySelectorAll(".lecture"));
-  const chunkSize = 8;
-  const result = [];
-
-  for (let i = 0; i < anchors.length; i += chunkSize) {
-    result.push(anchors.slice(i, i + chunkSize));
+  if (Array.isArray(template)) {
+    if (!Array.isArray(saved)) return template;
+    for (let i = 0; i < template.length; i++) {
+      saved[i] = mergeData(saved[i], template[i]);
+    }
+    return saved;
   }
 
+  if (typeof template === "object") {
+    for (const key of Object.keys(template)) {
+      saved[key] = mergeData(saved[key], template[key]);
+    }
+    return saved;
+  }
+
+  return saved;
+};
+
+// Сохранение и загрузка
+const saveData = () => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (error) {
+    console.error("Ошибка при сохранении в localStorage:", error);
+  }
+};
+
+const loadData = () => {
+  const template = getDefaultData();
+  try {
+    const rawData = localStorage.getItem(STORAGE_KEY);
+    if (!rawData) return template;
+    return mergeData(JSON.parse(rawData), template);
+  } catch (error) {
+    console.error("Ошибка загрузки localStorage:", error);
+    return template;
+  }
+};
+
+let data = loadData();
+saveData();
+
+// Отрисовка звонков
+const renderBells = () => {
+  const bellElements = document.querySelectorAll(".bell");
+
+  for (let index = 0; index < data.bells.length; index++) {
+    const bell = data.bells[index];
+    const el = bellElements[index];
+
+    if (el) {
+      el.textContent = `${index + 1}) ${bell.start} - ${bell.end}`;
+    }
+  }
+};
+
+// Отрисовка расписания
+const renderSchedule = (page = 0) => {
+  const anchors = Array.from(document.querySelectorAll(".lecture"));
   const currentSchedule = data.schedule[page];
+
   if (!currentSchedule) return;
 
-  for (let dayIndex = 0; dayIndex < currentSchedule.length; dayIndex++) {
-    const day = currentSchedule[dayIndex];
+  let anchorIndex = 0;
 
+  for (const day of currentSchedule) {
     for (let lessonIndex = 0; lessonIndex < day.length; lessonIndex++) {
       const lesson = day[lessonIndex];
-      const anchorElement = result[dayIndex]?.[lessonIndex];
+      const anchorElement = anchors[anchorIndex++];
 
       if (anchorElement) {
-        const lessonNumber = lessonIndex + 1;
-
-        anchorElement.textContent = lesson.text
-          ? `${lessonNumber}. ${lesson.text}`
-          : `${lessonNumber}.`;
-
+        anchorElement.textContent = lesson.text || "------------";
         anchorElement.href = lesson.url || "#";
       }
     }
   }
 };
 
-const HellsBells = () => {
-  const bells = document.querySelectorAll(".bell");
+// ЭКСПОРТ: Скачивание snapshot.json
+export const exportData = () => {
+  const jsonString = JSON.stringify(data, null, 2);
+  const blob = new Blob([jsonString], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
 
-  for (let index = 0; index < data.bells.length; index++) {
-    const bell = data.bells[index];
-    const bellElement = bells[index];
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "snapshot.json";
+  a.click();
 
-    if (bellElement) {
-      const bellNumber = index + 1;
-      bellElement.textContent = `${bellNumber}) ${bell.start} - ${bell.end}`;
-    }
-  }
+  URL.revokeObjectURL(url);
 };
 
-const RenderData = () => {
+// ИМПОРТ: Чтение snapshot.json и перезапись data
+export const importData = (currentPage = 0) => {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = ".json";
+
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const parsed = JSON.parse(event.target.result);
+
+        // Проверяем и валидируем через merge с дефолтным шаблоном
+        data = mergeData(parsed, getDefaultData());
+
+        // Сохраняем в localStorage и перерисовываем всё
+        saveData();
+        renderData();
+        renderSchedule(currentPage);
+
+        console.log("Данные успешно импортированы из snapshot.json");
+      } catch (err) {
+        console.error("Ошибка при чтении файла snapshot.json:", err);
+      }
+    };
+
+    reader.readAsText(file);
+  };
+
+  input.click();
+};
+
+// Открытие и логика формы редактирования
+export const openLectureForm = (page, dayIndex, lessonIndex) => {
+  const bgCoverer = document.querySelector(".bg-coverer");
+  const formLecture = document.querySelector(".form-lecture");
+  const nameInput = document.getElementById("name");
+  const linkInput = document.getElementById("link");
+  const cancelBtn = document.getElementById("cancel");
+  const submitBtn = document.getElementById("submit");
+
+  const targetLesson = data.schedule[page]?.[dayIndex]?.[lessonIndex];
+  if (!targetLesson) return;
+
+  nameInput.value =
+    targetLesson.text !== "------------" ? targetLesson.text : "";
+  linkInput.value = targetLesson.url || "";
+
+  bgCoverer.classList.remove("none");
+  formLecture.classList.remove("none");
+
+  const closeForm = () => {
+    nameInput.value = "";
+    linkInput.value = "";
+    bgCoverer.classList.add("none");
+    formLecture.classList.add("none");
+
+    submitBtn.onclick = null;
+    cancelBtn.onclick = null;
+  };
+
+  submitBtn.onclick = (e) => {
+    e.preventDefault();
+
+    targetLesson.text = nameInput.value.trim() || "------------";
+    targetLesson.url = linkInput.value.trim();
+
+    saveData();
+    renderSchedule(page);
+    closeForm();
+  };
+
+  cancelBtn.onclick = (e) => {
+    e.preventDefault();
+    closeForm();
+  };
+};
+
+const renderData = () => {
   console.log(`Applying theme №${data.theme}...`);
   setTheme(data.theme);
 
   console.log(`Rendering the call schedule...`);
-  HellsBells();
+  renderBells();
 
   console.log(`Rendering the lecture schedule...`);
-  RenderSchedule(0);
+  renderSchedule(0);
 };
 
-RenderData();
+renderData();
+
+export default renderSchedule;
